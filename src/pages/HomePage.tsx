@@ -1,8 +1,8 @@
 import Hero from '../components/Hero';
-import { FeaturesSectionDemo } from '../components/FeacturesSectionDemo';
+import Objectives from '../components/FeacturesSectionDemo';
 import Footer from '../components/Footer';
-import { CompareDemo } from '../components/Approach';
-import RecentProjects from "../components/RecentProjects"
+import ProgramStructure from '../components/ProgramStructure';
+import RecentProjects from "../components/MissionVision"
 import ContactForm from '../components/Contact';
 import Navbar from '../components/Navbar';
 const Home = () => {
@@ -14,8 +14,8 @@ const Home = () => {
       <Navbar/>
         <Hero />
         <RecentProjects />
-        <FeaturesSectionDemo />
-        <CompareDemo />
+        <Objectives />
+        <ProgramStructure />
         <ContactForm />
         <Footer />
       </div>
