@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import ProgramStructure from '../components/ProgramStructure';
 import RecentProjects from "../components/MissionVision"
 import ContactForm from '../components/Contact';
+import Benefits from '../components/beneficts';
 import Navbar from '../components/Navbar';
 const Home = () => {
   return (
@@ -16,7 +17,9 @@ const Home = () => {
         <RecentProjects />
         <Objectives />
         <ProgramStructure />
+        <Benefits/>
         <ContactForm />
+
         <Footer />
       </div>
     </main>
