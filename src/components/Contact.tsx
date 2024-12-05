@@ -1,189 +1,120 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import emailjs from "emailjs-com";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useEffect, useState } from 'react';
+import { Mail, Phone, Globe, ExternalLink } from 'lucide-react';
 
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
+const AccessContact = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
-interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-  submit?: string;
-}
-
-const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [isSending, setIsSending] = useState<boolean>(false);
-
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1, // La animación se activará cuando el 10% del componente sea visible
-  });
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validate = (): boolean => {
-    const errors: FormErrors = {};
-    if (!formData.name) errors.name = "El nombre es obligatorio";
-    if (!formData.email) errors.email = "El correo electrónico es obligatorio";
-    if (!formData.message) errors.message = "El mensaje es obligatorio";
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (validate()) {
-      setIsSending(true);
-      setErrors({});
-      try {
-        await emailjs.send(
-          process.env.REACT_APP_EMAILJS_SERVICE_ID || "",
-          process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "",
-          {
-            user_name: formData.name,
-            user_email: formData.email,
-            message: formData.message,
-          } as Record<string, unknown>,
-          process.env.REACT_APP_EMAILJS_USER_ID || ""
-        );
-        setIsSubmitted(true);
-        setFormData({ name: "", email: "", message: "" });
-      } catch (error) {
-        setErrors({ submit: "Error al enviar el mensaje. Intenta de nuevo más tarde." });
-      } finally {
-        setIsSending(false);
-        setTimeout(() => setIsSubmitted(false), 3000);
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = document.getElementById('contact');
+      if (element) {
+        const elementPosition = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (elementPosition.top < windowHeight * 0.75) {
+          setIsVisible(true);
+        }
       }
-    }
-  };
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <section className="w-full max-w-4xl mx-auto py-12 px-6">
-      <h1 className="heading mb-8 text-white underline">Contáctanos</h1>
+    <section id="contact" className="bg-[#0A0A0A] py-32 mt-15">
+      <div className="container mx-auto px-4 max-w-6xl">
+        {/* Header Section */}
+        <div className={`text-center mb-20 transform transition-all duration-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <h2 className="text-4xl font-bold text-white mb-6">
+            Contacto
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            Estamos aquí para ayudarte. No dudes en contactarnos a través de cualquiera de estos canales.
+          </p>
+        </div>
 
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 50 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-[var(--ultra-dark-gray)] rounded-lg shadow-lg p-8"
-      >
-        {isSubmitted && (
-          <motion.div
-            className="mb-4 p-4 bg-green-100 text-green-800 rounded-lg"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            ¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.
-          </motion.div>
-        )}
-        {errors.submit && (
-          <motion.div
-            className="mb-4 p-4 bg-red-100 text-red-800 rounded-lg"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {errors.submit}
-          </motion.div>
-        )}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              className="block text-lg font-medium mb-2 text-white"
-              htmlFor="name"
-            >
-              Nombre
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-gray-300 transition-all duration-300 focus:ring-2 focus:ring-cyan-500"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-            )}
+        {/* Contact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {/* Email Card */}
+          <div className={`group rounded-lg bg-[#111111] border border-[#1A1A1A] hover:border-[#2A2A2A] hover:bg-[#141414] transition-all duration-500 p-8 transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`} style={{ transitionDelay: '200ms' }}>
+            <div className="flex flex-col items-center text-center space-y-6">
+              <div className="p-4 bg-[#1A1A1A] rounded-xl group-hover:scale-105 group-hover:bg-[#202020] transition-all duration-300">
+                <Mail className="w-8 h-8 text-white/90" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-white/90 mb-2">Email</h3>
+                <a 
+                  href="mailto:info@negociacioncolaborativa.com" 
+                  className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center justify-center gap-2 group"
+                >
+                  info@negociacioncolaborativa.com
+                  <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </div>
+            </div>
           </div>
-          <div>
-            <label
-              className="block text-lg font-medium mb-2 text-white"
-              htmlFor="email"
-            >
-              Correo Electrónico
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-gray-300 transition-all duration-300 focus:ring-2 focus:ring-cyan-500"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
+
+          {/* Phone Card */}
+          <div className={`group rounded-lg bg-[#111111] border border-[#1A1A1A] hover:border-[#2A2A2A] hover:bg-[#141414] transition-all duration-500 p-8 transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`} style={{ transitionDelay: '400ms' }}>
+            <div className="flex flex-col items-center text-center space-y-6">
+              <div className="p-4 bg-[#1A1A1A] rounded-xl group-hover:scale-105 group-hover:bg-[#202020] transition-all duration-300">
+                <Phone className="w-8 h-8 text-white/90" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-white/90 mb-2">Teléfono</h3>
+                <a 
+                  href="tel:+541112345678" 
+                  className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center justify-center gap-2 group"
+                >
+                  +54 11 1234 5678
+                  <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </div>
+            </div>
           </div>
-          <div>
-            <label
-              className="block text-lg font-medium mb-2 text-white"
-              htmlFor="message"
-            >
-              Mensaje
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-gray-300 resize-none transition-all duration-300 focus:ring-2 focus:ring-cyan-500"
-            />
-            {errors.message && (
-              <p className="text-red-500 text-sm mt-1">{errors.message}</p>
-            )}
+
+          {/* Location Card */}
+          <div className={`group rounded-lg bg-[#111111] border border-[#1A1A1A] hover:border-[#2A2A2A] hover:bg-[#141414] transition-all duration-500 p-8 transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`} style={{ transitionDelay: '600ms' }}>
+            <div className="flex flex-col items-center text-center space-y-6">
+              <div className="p-4 bg-[#1A1A1A] rounded-xl group-hover:scale-105 group-hover:bg-[#202020] transition-all duration-300">
+                <Globe className="w-8 h-8 text-white/90" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-white/90 mb-2">Ubicación</h3>
+                <p className="text-gray-400">
+                  Programa 100% online,<br />
+                  disponible a nivel global
+                </p>
+              </div>
+            </div>
           </div>
-          <button
-            type="submit"
-            className={`w-full py-3 px-6 rounded-lg text-base font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${isSending
-                ? "bg-gray-700 text-gray-300 cursor-not-allowed"
-                : "bg-gray-100 text-gray-800 hover:bg-gray-200 border border-gray-300"
-              }`}
-            disabled={isSending}
-          >
-            {isSending
-              ? "Enviando..."
-              : isSubmitted
-                ? "Enviado ✔"
-                : "Enviar Mensaje"}
-          </button>
-        </form>
-      </motion.div>
+        </div>
+
+        {/* Additional Info */}
+        <div className={`rounded-lg bg-[#111111] border border-[#1A1A1A] p-8 max-w-2xl mx-auto transform transition-all duration-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`} style={{ transitionDelay: '800ms' }}>
+          <h3 className="text-lg font-semibold text-white/90 mb-1">
+            Horario de atención
+          </h3>
+          <p className="text-gray-400">
+            Lunes a Viernes: 9:00 - 18:00 (GMT-3)
+          </p>
+        </div>
+      </div>
     </section>
   );
 };
 
-export default ContactForm;
+export default AccessContact;

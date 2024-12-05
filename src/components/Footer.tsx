@@ -1,20 +1,17 @@
 "use client";
-
-import { FaLinkedinIn } from "react-icons/fa";
+import { Linkedin, Instagram } from 'lucide-react';
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 
 export default function Footer() {
   const controls = useAnimation();
 
-  // Trigger animation when the component is scrolled into view
   useEffect(() => {
     const handleScroll = () => {
       const footerElement = document.querySelector('footer');
       if (footerElement) {
         const rect = footerElement.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-
         if (isVisible) {
           controls.start({ opacity: 1, y: 0 });
         } else {
@@ -25,7 +22,6 @@ export default function Footer() {
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Trigger scroll event to set initial state
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, [controls]);
 
@@ -64,26 +60,39 @@ export default function Footer() {
               className="hover:text-gray-100 transition duration-300 ease-in-out"
               whileHover={{ scale: 1.05, color: "#f3f4f6" }}
             >
-              Conexión Constructiva
+              Negociación Colaborativa
             </motion.a>
           </p>
         </div>
 
         {/* Social Media Icons */}
-        <div className="flex space-x-6 mt-4 sm:mt-0">
+        <div className="flex space-x-4 mt-4 sm:mt-0">
           <motion.a
-            href="https://www.linkedin.com/company/conexion-constructiva-sa/"
+            href="https://www.linkedin.com"
             className="hover:text-gray-100 transition duration-500 ease-in-out"
             aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.1, backgroundColor: "#1f2937" }}
+            whileHover={{ scale: 1.1 }}
           >
-            <FaLinkedinIn className="h-10 w-10 rounded-full border border-gray-700 p-2" />
+            <div className="h-10 w-10 rounded-full border border-gray-700 hover:border-gray-400 hover:bg-gray-800 transition-all duration-300 flex items-center justify-center">
+              <Linkedin size={20} className="text-gray-400 hover:text-white transition-colors duration-300" />
+            </div>
+          </motion.a>
+          <motion.a
+            href="https://www.instagram.com"
+            className="hover:text-gray-100 transition duration-500 ease-in-out"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="h-10 w-10 rounded-full border border-gray-700 hover:border-gray-400 hover:bg-gray-800 transition-all duration-300 flex items-center justify-center">
+              <Instagram size={20} className="text-gray-400 hover:text-white transition-colors duration-300" />
+            </div>
           </motion.a>
         </div>
       </motion.div>
     </footer>
   );
 }
-

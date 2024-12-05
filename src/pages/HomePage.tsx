@@ -2,8 +2,8 @@ import Hero from '../components/Hero';
 import Objectives from '../components/FeacturesSectionDemo';
 import Footer from '../components/Footer';
 import ProgramStructure from '../components/ProgramStructure';
-import RecentProjects from "../components/MissionVision"
-import ContactForm from '../components/Contact';
+import MissionVision from '../components/MissionVision';
+import AccessContact from '../components/Contact';
 import Benefits from '../components/beneficts';
 import Navbar from '../components/Navbar';
 const Home = () => {
@@ -14,11 +14,11 @@ const Home = () => {
         
       <Navbar/>
         <Hero />
-        <RecentProjects />
         <Objectives />
+        <MissionVision />
         <ProgramStructure />
         <Benefits/>
-        <ContactForm />
+        <AccessContact />
 
         <Footer />
       </div>

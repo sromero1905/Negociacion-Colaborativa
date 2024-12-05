@@ -1,216 +1,204 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { 
+  Sparkles, 
+  ArrowRight, 
+  GraduationCap, 
+  Target, 
+  Users, 
+  Award 
+} from 'lucide-react';
 
-const Home: React.FC = () => {
-  // Variants for staggered animations
+const Home = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         delayChildren: 0.2,
-        staggerChildren: 0.1
+        staggerChildren: 0.15
       }
     }
   };
 
   const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.9
+    hidden: {
+      opacity: 0,
+      y: 30,
+      scale: 0.95
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
+        ease: [0.215, 0.610, 0.355, 1.000]
+      }
+    }
+  };
+
+  const imageVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      rotate: -5
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 1.5,
         ease: "easeOut"
       }
     }
   };
 
-  const abstractImageVariants = {
-    hidden: { 
-      opacity: 0, 
-      x: 100,
-      rotate: -10
-    },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      rotate: 0,
-      transition: {
-        type: "spring",
-        stiffness: 50,
-        damping: 10,
-        duration: 1
-      }
-    }
-  };
+  const features = [
+    { text: "Metodología probada", icon: Target },
+    { text: "Casos prácticos", icon: GraduationCap },
+    { text: "Mentores expertos", icon: Users },
+    { text: "Certificación profesional", icon: Award }
+  ];
 
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-hidden flex items-center">
-      {/* Background Layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-950 via-black to-neutral-900 opacity-100"></div>
-      
-      <div 
-        className="absolute inset-0 opacity-10" 
-        style={{
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize: '16px 16px'
-        }}
-      ></div>
+    <div className="relative min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex items-center mt-20">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: 'radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%), radial-gradient(circle at 30% 50%, rgba(147, 51, 234, 0.15) 0%, transparent 70%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+            backgroundSize: '32px 32px'
+          }}
+        />
+      </div>
 
-      {/* Geometric Accent */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-          rotate: [0, 5, -5, 0]
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute -top-1/2 -right-1/2 w-full h-full 
-        bg-gradient-to-br from-blue-900/5 via-purple-900/5 to-pink-900/5 
-        rounded-full blur-3xl opacity-20"
-      ></motion.div>
-
-      <motion.div 
+      <motion.div
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="relative z-10 container mx-auto px-6 max-w-6xl"
+        className="relative z-10 container mx-auto px-6 py-20 max-w-7xl"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Content Section */}
-          <motion.div 
-            variants={containerVariants}
-            className="space-y-8"
-          >
-            {/* Headline */}
-            <motion.h1 
+          <motion.div variants={containerVariants} className="space-y-10">
+            {/* Badge */}
+            <motion.div
               variants={itemVariants}
-              className="
-                text-5xl md:text-6xl font-bold 
-                bg-clip-text text-transparent 
-                bg-gradient-to-r from-neutral-100 to-neutral-400
-                leading-tight tracking-tight
-              "
+              className="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-400/20 rounded-full px-4 py-1.5"
             >
-              Negociación
-              <br />
-              Estratégica
-            </motion.h1>
+              <Sparkles size={16} className="text-blue-400" />
+              <span className="text-sm font-medium text-blue-300">Próximo curso inicia en Marzo 2024</span>
+            </motion.div>
 
-            {/* Description */}
-            <motion.div 
-              variants={itemVariants}
-              className="
-                text-xl text-neutral-300 
-                leading-relaxed 
-                relative
-                pl-6
-                before:absolute before:left-0 before:top-0 before:bottom-0 
-                before:w-1 before:bg-gradient-to-b before:from-blue-600 before:to-purple-600
-              "
-            >
-              <p>
-                Transforma desafíos en oportunidades con técnicas de comunicación avanzadas y estrategias de resolución de conflictos de alto impacto.
+            {/* Headline */}
+            <motion.div variants={itemVariants} className="space-y-4">
+              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
+                <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
+                  Domina el Arte de la
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Negociación
+                </span>
+              </h1>
+              <p className="text-xl lg:text-2xl text-neutral-400 leading-relaxed max-w-2xl">
+                Desarrolla habilidades avanzadas de negociación y comunicación estratégica para transformar cada interacción en una oportunidad de éxito.
               </p>
             </motion.div>
 
-            {/* Action Buttons */}
-            <motion.div 
-              variants={itemVariants}
-              className="flex space-x-6"
-            >
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="
-                  px-10 py-4 
-                  bg-gradient-to-r from-blue-600 to-purple-700
-                  text-white 
-                  font-semibold 
-                  rounded-xl 
-                  hover:from-blue-700 hover:to-purple-800
-                  transition-all duration-300 
-                  shadow-xl 
-                  hover:shadow-blue-500/40
-                "
-              >
-                Comenzar Programa
-              </motion.button>
+            {/* Features */}
+            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-6 max-w-2xl">
+              {features.map(({ text, icon: Icon }, index) => (
+                <div 
+                  key={index} 
+                  className="flex items-center space-x-3 bg-blue-500/5 rounded-xl p-4 border border-blue-400/10 hover:bg-blue-500/10 hover:border-blue-400/20 transition-colors duration-200"
+                >
+                  <div className="p-2 bg-blue-500/10 rounded-lg">
+                    <Icon size={20} className="text-blue-400" />
+                  </div>
+                  <span className="text-neutral-200 font-medium">{text}</span>
+                </div>
+              ))}
+            </motion.div>
 
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="
-                  px-10 py-4 
-                  border border-neutral-700 
-                  text-neutral-300 
-                  rounded-xl 
-                  bg-transparent
-                  hover:bg-neutral-800/50 
-                  hover:border-neutral-600
-                  transition-all duration-300 
-                  shadow-md
-                "
+            {/* Action Buttons */}
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+              <button
+                className="group flex items-center px-8 py-4 rounded-xl font-medium 
+                bg-gradient-to-r from-blue-600 to-blue-500 
+                hover:from-blue-500 hover:to-blue-600
+                transition-all duration-200 
+                gap-3 shadow-lg shadow-blue-500/20 
+                relative overflow-hidden"
               >
-                Más Información
-              </motion.button>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                <span className="relative z-10">Iniciar Programa</span>
+                <ArrowRight 
+                  size={18} 
+                  className="relative z-10 transform transition-transform duration-200 group-hover:translate-x-1" 
+                />
+              </button>
+              
+              <button
+                className="group px-8 py-4 rounded-xl font-medium 
+                border border-blue-500/20
+                bg-blue-500/10 hover:bg-blue-500/20
+                text-blue-300 hover:text-blue-200
+                transition-all duration-200
+                shadow-lg shadow-black/20"
+              >
+                Explorar Contenido
+              </button>
             </motion.div>
           </motion.div>
 
-          {/* Abstract Visual Element */}
-          <motion.div 
-            variants={abstractImageVariants}
-            className="hidden md:flex items-center justify-center relative"
+          {/* Visual Element with Image */}
+          <motion.div
+            variants={imageVariants}
+            className="hidden lg:block relative"
           >
-            <div className="
-              absolute 
-              -inset-12 
-              bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 
-              rounded-[3rem] 
-              blur-3xl 
-              opacity-50
-            "></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl blur-3xl" />
+            <div className="relative w-full max-w-xl mx-auto">
+              <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A]">
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent z-10" />
+                
+                {/* Image */}
+                <img
+                  src="../hero.jpg"
+                  alt="Negociación estratégica"
+                  className="w-full h-[750px] object-cover object-center opacity-80"
+                />
 
-            <div className="
-              relative 
-              w-[480px] 
-              h-[480px] 
-              bg-neutral-900/30 
-              border border-neutral-700/30 
-              rounded-[2.5rem] 
-              backdrop-blur-lg 
-              flex items-center justify-center
-              overflow-hidden
-              shadow-2xl
-            ">
-              <motion.div 
-                animate={{
-                  scale: [1, 1.15, 1],
-                  rotate: [0, 5, -5, 0]
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="
-                  w-72 h-72 
-                  bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 
-                  rounded-full 
-                  blur-md
-                "
-              ></motion.div>
+                {/* Static overlay instead of animated */}
+                <div
+                  className="absolute inset-0 opacity-40 z-20"
+                  style={{
+                    backgroundImage: 'radial-gradient(circle at center, rgba(59, 130, 246, 0.3), transparent 50%)',
+                    backgroundSize: '100% 100%'
+                  }}
+                />
+
+                {/* Decorative elements */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 z-30">
+                  <div className="flex items-center justify-between">
+                    <div className="flex space-x-2">
+                      <div className="w-2 h-2 rounded-full bg-blue-400/70" />
+                      <div className="w-2 h-2 rounded-full bg-purple-400/70" />
+                      <div className="w-2 h-2 rounded-full bg-pink-400/70" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

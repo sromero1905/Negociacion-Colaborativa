@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Shield, Zap, Star, Clock, Users, Award, ChevronRight } from 'lucide-react';
 
 const Benefits = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    const benefitCards = document.querySelectorAll('.benefit-card');
+    benefitCards.forEach((card) => {
+      observer.observe(card);
+    });
+
+    return () => {
+      benefitCards.forEach((card) => {
+        observer.unobserve(card);
+      });
+    };
+  }, []);
+
   const benefits = [
     {
       category: 'Aprendizaje',
@@ -42,7 +71,7 @@ const Benefits = () => {
   ];
 
   return (
-    <section className="bg-black py-24">
+    <section className="bg-neutral-950 py-24 mt-20" ref={sectionRef}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="max-w-xl mx-auto text-center mb-20">
@@ -59,7 +88,8 @@ const Benefits = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="group relative bg-gray-900/80 rounded-2xl overflow-hidden border border-gray-800 hover:border-emerald-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5"
+              className="benefit-card opacity-0 translate-y-10 transform transition-all duration-700 ease-out delay-100 group relative bg-neutral-900/80 rounded-2xl overflow-hidden border border-neutral-800 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5"
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
               {/* Top Accent Bar */}
               <div className="h-1 w-full bg-gradient-to-r from-emerald-500 via-emerald-400 to-transparent"></div>
@@ -71,7 +101,7 @@ const Benefits = () => {
                   <span className="text-sm font-medium tracking-wider bg-emerald-400/10 text-emerald-400 px-3 py-1 rounded-full">
                     {benefit.category.toUpperCase()}
                   </span>
-                  <div className="p-3 rounded-xl bg-black/50 backdrop-blur-sm border border-gray-800 group-hover:border-emerald-500/30 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-emerald-500/10">
+                  <div className="p-3 rounded-xl bg-neutral-950/50 backdrop-blur-sm border border-neutral-800 group-hover:border-emerald-500/30 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-emerald-500/10">
                     <benefit.icon className="w-5 h-5 text-emerald-400" />
                   </div>
                 </div>
@@ -89,7 +119,7 @@ const Benefits = () => {
                 {/* Feature List */}
                 <div className="space-y-4 mb-8">
                   {benefit.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start group/item bg-black/20 rounded-lg p-3 hover:bg-black/40 transition-colors duration-300">
+                    <div key={idx} className="flex items-start group/item bg-neutral-950/20 rounded-lg p-3 hover:bg-neutral-950/40 transition-colors duration-300">
                       <ChevronRight className="w-5 h-5 text-emerald-400 mr-2 transform group-hover/item:translate-x-1 transition-transform duration-300 mt-0.5" />
                       <span className="text-sm text-gray-300 group-hover/item:text-emerald-200 transition-colors duration-300">
                         {feature}
@@ -120,7 +150,7 @@ const Benefits = () => {
           ].map((stat, index) => (
             <div 
               key={index}
-              className="flex items-center space-x-3 bg-gray-900/50 backdrop-blur-sm border border-gray-800 px-5 py-2.5 rounded-full hover:border-emerald-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5"
+              className="flex items-center space-x-3 bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 px-5 py-2.5 rounded-full hover:border-emerald-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5"
             >
               <stat.icon className="w-4 h-4 text-emerald-400" />
               <span className="text-sm text-gray-300">{stat.text}</span>
