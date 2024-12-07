@@ -148,15 +148,20 @@ const Home = () => {
                 />
               </button>
               
-              <button
-                className="group px-8 py-4 rounded-xl font-medium 
-                border border-blue-500/20
-                bg-blue-500/10 hover:bg-blue-500/20
-                text-blue-300 hover:text-blue-200
-                transition-all duration-200
-                shadow-lg shadow-black/20"
-              >
-                Explorar Contenido
+              <button>
+               
+               <a
+               href="/mas-info"
+               className="group px-8 py-4 rounded-xl font-medium 
+                 border border-blue-500/20
+                 bg-blue-500/10 hover:bg-blue-500/20
+                 text-blue-300 hover:text-blue-200
+                 transition-all duration-200
+                 shadow-lg shadow-black/20
+                 inline-block text-center no-underline"
+             >
+               Explorar Contenido
+             </a>
               </button>
             </motion.div>
           </motion.div>

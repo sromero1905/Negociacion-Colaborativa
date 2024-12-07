@@ -1,8 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Zap, Star, Clock, Users, Award, ChevronRight } from 'lucide-react';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
+
 
 const Benefits = () => {
   const sectionRef = useRef(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [currentBenefit, setCurrentBenefit] = useState<typeof benefits[number] | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,6 +75,11 @@ const Benefits = () => {
     }
   ];
 
+  const handleCardClick = (benefit: typeof benefits[number]) => {
+    setCurrentBenefit(benefit);
+    setIsPopupOpen(true);
+  };
+
   return (
     <section className="bg-neutral-950 py-24 mt-20" ref={sectionRef}>
       <div className="container mx-auto px-4">
@@ -90,6 +100,7 @@ const Benefits = () => {
               key={index}
               className="benefit-card opacity-0 translate-y-10 transform transition-all duration-700 ease-out delay-100 group relative bg-neutral-900/80 rounded-2xl overflow-hidden border border-neutral-800 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5"
               style={{ transitionDelay: `${index * 200}ms` }}
+              onClick={() => handleCardClick(benefit)}
             >
               {/* Top Accent Bar */}
               <div className="h-1 w-full bg-gradient-to-r from-emerald-500 via-emerald-400 to-transparent"></div>
@@ -158,6 +169,67 @@ const Benefits = () => {
           ))}
         </div>
       </div>
+
+      {/* Pop-up Dialog */}
+      <Transition appear show={isPopupOpen} as={Fragment}>
+  <Dialog as="div" className="fixed inset-0 z-50 overflow-y-auto" onClose={() => setIsPopupOpen(false)}>
+    <div className="min-h-screen px-4 text-center">
+      <Transition.Child
+        as={Fragment}
+        enter="ease-out duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="ease-in duration-200"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        {/* Reemplazamos <Dialog.Overlay> */}
+        <div className="fixed inset-0 bg-neutral-950/80 backdrop-blur-sm transition-opacity" />
+      </Transition.Child>
+      <span className="inline-block h-screen align-middle" aria-hidden="true">
+        &#8203;
+      </span>
+      <Transition.Child
+        as={Fragment}
+        enter="ease-out duration-300"
+        enterFrom="opacity-0 scale-95"
+        enterTo="opacity-100 scale-100"
+        leave="ease-in duration-200"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-95"
+      >
+        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-neutral-900 shadow-xl rounded-2xl">
+          <Dialog.Title as="h3" className="text-2xl font-bold text-white mb-4">
+            {currentBenefit?.mainBenefit}
+          </Dialog.Title>
+          <div className="mt-2">
+            <p className="text-sm text-gray-400">
+              {currentBenefit?.description}
+            </p>
+            <div className="mt-4 space-y-3">
+              {currentBenefit?.features?.map((feature, idx) => (
+                <div key={idx} className="flex items-center space-x-3">
+                  <ChevronRight className="w-5 h-5 text-emerald-400" />
+                  <span className="text-sm text-gray-300">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-4 flex justify-end">
+            <button
+              type="button"
+              className="inline-flex justify-center px-4 py-2 text-sm font-medium text-emerald-400 bg-neutral-900/50 border border-emerald-500/20 rounded-md hover:bg-neutral-900/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500"
+              onClick={() => setIsPopupOpen(false)}
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </Transition.Child>
+    </div>
+  </Dialog>
+</Transition>
+
     </section>
   );
 };
