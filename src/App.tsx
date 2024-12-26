@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage'; // Ruta al componente HomePage
 import TermsPage from './pages/TermsPage'; // Ruta al componente TermsPage
 import PrivacyPage from './pages/PrivacyPage'; // Ruta al componente PrivacyPage
 import MoreInfo from './pages/moreinformation';
-
+import ModuleDetail from './components/modulo.detail';
 const App = () => {
   return (
     <Routes> {/* Define tus rutas aquí */}
@@ -12,7 +12,7 @@ const App = () => {
       <Route path="/terms" element={<TermsPage />} /> {/* Ruta para la página de términos */}
       <Route path="/privacy" element={<PrivacyPage />} /> {/* Ruta para la página de privacidad */}
       <Route path="/mas-info" element={<MoreInfo/>} /> {/* Ruta para la página de privacidad */}
-      {/* Agrega más rutas según sea necesario */}
+      <Route path="/modulo/:moduleId" element={<ModuleDetail />} />
     </Routes>
   );
 };

@@ -1,8 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Clock, Brain, Target, Workflow, ArrowRight } from 'lucide-react';
+import { Check, Clock, Brain, Target, Workflow, ArrowRight, LucideIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { modules } from '../data/index';
 
-const ModernLearningSection = () => {
+interface Module {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+  image: string;
+  path: string;
+  items: string[];
+}
+
+const ModernLearningSection: React.FC = () => {
+  const navigate = useNavigate();
+  
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -38,8 +52,25 @@ const ModernLearningSection = () => {
     }
   };
 
+  const handleExploreModule = (path: string): void => {
+    navigate(`/modulo/${path}`);
+  };
+
+  const getIcon = (moduleId: number): LucideIcon => {
+    switch (moduleId) {
+      case 1:
+        return Brain;
+      case 2:
+        return Workflow;
+      case 3:
+        return Target;
+      default:
+        return Brain;
+    }
+  };
+
   return (
-    <div className="bg-[#0A0A0A] relative overflow-hidden">
+    <div className="relative overflow-hidden">
       {/* Gradientes de fondo animados */}
       <motion.div 
         initial={{ opacity: 0 }}
@@ -79,86 +110,58 @@ const ModernLearningSection = () => {
           variants={fadeInUpStagger}
           className="grid lg:grid-cols-3 gap-8 mb-32"
         >
-          {[
-            {
-              icon: Brain,
-              title: "Fundamentos",
-              subtitle: "Base teórica esencial",
-              items: [
-                "Teoría del conflicto",
-                "Bases de la negociación",
-                "Modelos de comunicación",
-                "Psicología del acuerdo"
-              ]
-            },
-            {
-              icon: Workflow,
-              title: "Proceso Práctico",
-              subtitle: "Aplicación y práctica",
-              items: [
-                "Casos de estudio reales",
-                "Simulaciones guiadas",
-                "Feedback personalizado",
-                "Ejercicios grupales"
-              ]
-            },
-            {
-              icon: Target,
-              title: "Dominio",
-              subtitle: "Perfeccionamiento",
-              items: [
-                "Técnicas avanzadas",
-                "Estrategias de cierre",
-                "Gestión de conflictos",
-                "Liderazgo negociador"
-              ]
-            }
-          ].map((phase, index) => (
-            <motion.div
-              key={index}
-              variants={scaleIn}
-              className="group relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-blue-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
-              <div className="relative p-8 bg-white/[0.01] rounded-2xl border border-white/[0.05] hover:border-white/[0.08] transition-all duration-500 backdrop-blur-sm hover:transform hover:scale-[1.02]">
-                {/* Header del card */}
-                <div className="mb-8">
-                  <div className="w-12 h-12 bg-white/[0.03] rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/[0.05] transition-colors">
-                    <phase.icon className="w-6 h-6 text-blue-400/80" />
+          {modules.map((module: Module) => {
+            const Icon = getIcon(module.id);
+            return (
+              <motion.div
+                key={module.id}
+                variants={scaleIn}
+                className="group relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
+                <div className="relative p-8 bg-white/[0.01] rounded-2xl border border-white/[0.05] hover:border-white/[0.08] transition-all duration-500 backdrop-blur-sm hover:transform hover:scale-[1.02]">
+                  {/* Header del card */}
+                  <div className="mb-8">
+                    <div className="w-12 h-12 bg-white/[0.03] rounded-xl flex items-center justify-center mb-6 group-hover:bg-white/[0.05] transition-colors">
+                      <Icon className="w-6 h-6 text-blue-400/80" />
+                    </div>
+                    <h3 className="text-xl font-medium text-white mb-2 group-hover:text-blue-400/90 transition-colors">
+                      {module.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      {module.description}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-medium text-white mb-2 group-hover:text-blue-400/90 transition-colors">
-                    {phase.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm">
-                    {phase.subtitle}
-                  </p>
-                </div>
 
-                {/* Lista de items */}
-                <ul className="space-y-4">
-                  {phase.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-3">
-                      <div className="relative mt-1">
-                        <div className="absolute inset-0 bg-blue-400/20 blur-sm rounded-full" />
-                        <Check className="w-4 h-4 text-blue-400/80 relative" />
-                      </div>
-                      <span className="text-gray-400 text-sm leading-relaxed">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                  {/* Lista de items */}
+                  <ul className="space-y-4">
+                    {module.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start gap-3">
+                        <div className="relative mt-1">
+                          <div className="absolute inset-0 bg-blue-400/20 blur-sm rounded-full" />
+                          <Check className="w-4 h-4 text-blue-400/80 relative" />
+                        </div>
+                        <span className="text-gray-400 text-sm leading-relaxed">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
 
-                {/* Footer con hover effect */}
-                <div className="mt-8 pt-6 border-t border-white/[0.05]">
-                  <button className="flex items-center gap-2 text-sm text-gray-500 group-hover:text-white/90 transition-colors">
-                    <span>Explorar módulo</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  {/* Footer con hover effect */}
+                  <div className="mt-8 pt-6 border-t border-white/[0.05]">
+                    <button 
+                      onClick={() => handleExploreModule(module.path)}
+                      className="flex items-center gap-2 text-sm text-gray-500 group-hover:text-white/90 transition-colors"
+                    >
+                      <span>Explorar módulo</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Stats con animación */}
