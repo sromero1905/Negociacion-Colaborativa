@@ -326,9 +326,11 @@ const ModuleDetail: React.FC = () => {
                 shadow-xl shadow-neutral-900/30 hover:shadow-2xl hover:shadow-neutral-900/40
                 transform hover:-translate-y-0.5"
             >
+              <a href="/pricing">
               <span className="relative z-10 tracking-tight">
-                Comenzar Módulo
+                Comenzar
               </span>
+              </a>
               <span 
                 className="absolute inset-0 bg-gradient-to-r from-neutral-900/20 to-neutral-900/30 
                   opacity-0 group-hover:opacity-10 

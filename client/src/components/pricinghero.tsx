@@ -5,39 +5,38 @@ const PricingHero = () => {
   const [planType, setPlanType] = useState('individual');
 
   return (
-    <section className="relative py-24">
+    <section className="relative py-16 sm:py-24">
       {/* Elegant Background Pattern */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 " />
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 163 184) 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }} />
         {/* Gradient Orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl max-sm:hidden" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl max-sm:hidden" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center px-4 py-2 bg-white/5 rounded-full mb-6 backdrop-blur-sm">
             <span className="text-sm font-medium text-gray-300">
               Pricing Plans
             </span>
           </div>
-          <h1 className="text-4xl font-semibold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">
             Selecciona el plan ideal para ti
           </h1>
         </div>
 
         {/* Plan Selector */}
-        <div className="flex justify-center mb-16">
-          <div className=" p-1.5 rounded-2xl backdrop-blur-sm">
+        <div className="flex justify-center mb-12 sm:mb-16">
+          <div className="p-1.5 rounded-2xl backdrop-blur-sm bg-white/10">
             <div className="relative flex space-x-1">
               <button
                 onClick={() => setPlanType('individual')}
-                className={`relative px-8 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                className={`relative px-4 sm:px-8 py-2 sm:py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                   planType === 'individual'
                     ? 'text-gray-900 bg-white shadow-sm'
                     : 'text-gray-300 hover:text-white'
@@ -50,7 +49,7 @@ const PricingHero = () => {
               </button>
               <button
                 onClick={() => setPlanType('business')}
-                className={`relative px-8 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                className={`relative px-4 sm:px-8 py-2 sm:py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                   planType === 'business'
                     ? 'text-gray-900 bg-white shadow-sm'
                     : 'text-gray-300 hover:text-white'
@@ -78,10 +77,10 @@ const PricingHero = () => {
                   {/* Top colored border */}
                   <div className="h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-[20px]" />
                   
-                  <div className="p-12">
+                  <div className="p-6 sm:p-12">
                     {/* Plan Header */}
-                    <div className="flex justify-between items-start mb-8">
-                      <div>
+                    <div className="flex flex-col sm:flex-row justify-between items-start mb-8">
+                      <div className="mb-4 sm:mb-0">
                         <h3 className="text-xl font-semibold text-white mb-2">
                           Plan Individual
                         </h3>
@@ -97,14 +96,14 @@ const PricingHero = () => {
                     {/* Pricing */}
                     <div className="mb-8 pb-8 border-b border-gray-800">
                       <div className="flex items-baseline mb-2">
-                        <span className="text-5xl font-bold text-white">$497</span>
+                        <span className="text-4xl sm:text-5xl font-bold text-white">$497</span>
                         <span className="text-gray-400 ml-2">USD</span>
                       </div>
                       <p className="text-sm text-gray-400">Pago único - Sin cargos recurrentes</p>
                     </div>
 
                     {/* Key Benefits */}
-                    <div className="grid grid-cols-2 gap-6 mb-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                       <div className="flex items-center space-x-3">
                         <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
                           <Clock className="w-5 h-5 text-blue-400" />
@@ -149,19 +148,19 @@ const PricingHero = () => {
                     <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 px-6 rounded-xl transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg hover:shadow-blue-500/25">
                       Comenzar ahora
                     </button>
-                  </div>
 
-                  {/* Bottom Section */}
-                  <div className="px-12 py-6 bg-gray-800/50 rounded-b-[20px] border-t border-gray-800">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <Award className="w-5 h-5 text-blue-400" />
-                        <span className="text-sm text-gray-400">Satisfacción garantizada</span>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <img src="../visa-line.png" alt="Visa" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
-                        <img src="../mastercard-line.png" alt="Mastercard" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
-                        <img src="../bank-line.png" alt="Transferencia" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                    {/* Bottom Section */}
+                    <div className="mt-6 sm:mt-0 sm:absolute sm:bottom-0 sm:left-0 sm:right-0 sm:px-12 sm:py-6 sm:bg-gray-800/50 sm:rounded-b-[20px] sm:border-t sm:border-gray-800">
+                      <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                        <div className="flex items-center space-x-2">
+                          <Award className="w-5 h-5 text-blue-400" />
+                          <span className="text-sm text-gray-400">Satisfacción garantizada</span>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                          <img src="../visa-line.png" alt="Visa" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                          <img src="../mastercard-line.png" alt="Mastercard" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                          <img src="../bank-line.png" alt="Transferencia" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -176,14 +175,14 @@ const PricingHero = () => {
                 <div className="absolute -inset-[0.5px] bg-gradient-to-r from-gray-500/50 to-gray-600/50 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
                 <div className="relative bg-gray-900 rounded-[20px] border border-gray-800">
                   <div className="h-1.5 bg-gradient-to-r from-gray-400 to-gray-500" />
-                  <div className="p-12">
+                  <div className="p-6 sm:p-12">
                     <div className="mb-8">
                       <h3 className="text-xl font-semibold text-white mb-2">Equipos</h3>
                       <p className="text-gray-400">Para equipos pequeños</p>
                       
                       <div className="mt-6">
                         <div className="flex items-baseline">
-                          <span className="text-5xl font-bold text-white">$1,997</span>
+                          <span className="text-4xl sm:text-5xl font-bold text-white">$1,997</span>
                           <span className="text-gray-400 ml-2">USD</span>
                         </div>
                         <p className="text-sm text-gray-400 mt-2">Hasta 5 miembros</p>
@@ -221,13 +220,13 @@ const PricingHero = () => {
                 <div className="absolute -inset-[0.5px] bg-gradient-to-r from-blue-500/50 to-indigo-500/50 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
                 <div className="relative bg-gray-900 rounded-[20px] border border-gray-800">
                   <div className="h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500" />
-                  <div className="p-12">
+                  <div className="p-6 sm:p-12">
                     <div className="mb-8">
                       <h3 className="text-xl font-semibold text-white mb-2">Empresarial</h3>
                       <p className="text-gray-400">Solución personalizada</p>
                       
                       <div className="mt-6">
-                        <div className="text-5xl font-bold text-white">Personalizado</div>
+                        <div className="text-4xl sm:text-5xl font-bold text-white">Personalizado</div>
                         <p className="text-sm text-gray-400 mt-2">Contacta para más detalles</p>
                       </div>
                     </div>
