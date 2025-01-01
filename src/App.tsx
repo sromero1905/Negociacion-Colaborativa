@@ -1,18 +1,22 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'; // Importa Routes y Route para el enrutamiento
-import HomePage from './pages/HomePage'; // Ruta al componente HomePage
-import TermsPage from './pages/TermsPage'; // Ruta al componente TermsPage
-import PrivacyPage from './pages/PrivacyPage'; // Ruta al componente PrivacyPage
+import { Routes, Route } from 'react-router-dom'; 
+import HomePage from './pages/HomePage'; 
+import TermsPage from './pages/TermsPage'; 
+import PrivacyPage from './pages/PrivacyPage';
 import MoreInfo from './pages/moreinformation';
 import ModuleDetail from './components/modulo.detail';
+import Pricing from './pages/Pricing';
+import Contact from './pages/contact';
 const App = () => {
   return (
     <Routes> {/* Define tus rutas aquí */}
-      <Route path="/" element={<HomePage />} /> {/* Ruta para la página de inicio */}
-      <Route path="/terms" element={<TermsPage />} /> {/* Ruta para la página de términos */}
-      <Route path="/privacy" element={<PrivacyPage />} /> {/* Ruta para la página de privacidad */}
-      <Route path="/mas-info" element={<MoreInfo/>} /> {/* Ruta para la página de privacidad */}
+      <Route path="/" element={<HomePage />} /> 
+      <Route path="/terms" element={<TermsPage />} /> 
+      <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/mas-info" element={<MoreInfo/>} /> 
       <Route path="/modulo/:moduleId" element={<ModuleDetail />} />
+      <Route path="/pricing" element={<Pricing/>} /> 
+      <Route path="/contact" element={<Contact/>} /> 
     </Routes>
   );
 };

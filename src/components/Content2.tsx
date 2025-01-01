@@ -70,7 +70,7 @@ const ModernLearningSection: React.FC = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden" id='modulos'>
       {/* Gradientes de fondo animados */}
       <motion.div 
         initial={{ opacity: 0 }}
@@ -118,7 +118,7 @@ const ModernLearningSection: React.FC = () => {
                 variants={scaleIn}
                 className="group relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-blue-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
+                <div className="absolute inset-0 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
                 <div className="relative p-8 bg-white/[0.01] rounded-2xl border border-white/[0.05] hover:border-white/[0.08] transition-all duration-500 backdrop-blur-sm hover:transform hover:scale-[1.02]">
                   {/* Header del card */}
                   <div className="mb-8">
@@ -214,7 +214,9 @@ const ModernLearningSection: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-2 px-8 py-4 bg-blue-500/10 text-white rounded-xl font-medium hover:bg-blue-500/20 transition-all border border-blue-500/20 hover:border-blue-500/30"
             >
+              <a href="/pricing">
               <span>Comenzar ahora</span>
+              </a>
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>

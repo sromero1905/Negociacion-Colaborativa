@@ -33,9 +33,10 @@ const Navbar: React.FC = () => {
   }, [isVisible]);
 
   const navLinks = [
-    { href: "#inicio", label: "Inicio" },
+    { href: "/", label: "Inicio" },
     { href: "#mision", label: "Misión" },
-    { href: "#programa", label: "Programa" }
+    { href: "/mas-info", label: "Programa" },
+    { href: "/contact", label: "Contacto" },
   ];
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -89,12 +90,16 @@ const Navbar: React.FC = () => {
             }}
             className="flex items-center space-x-3"
           >
+                    <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 bg-white/30 rounded-full"></div>
             <h1 className="text-xl sm:text-2xl font-light tracking-tight text-white">
-              <span className="font-semibold text-white/90">
-                Negociación
-              </span> Colaborativa
+              <a href="/" className="no-underline hover:opacity-80 transition-opacity duration-200">
+                <span className="font-semibold text-white/90">
+                  Negociación
+                </span> Colaborativa
+              </a>
             </h1>
+          </div>
           </motion.div>
 
           {/* Desktop Navigation */}

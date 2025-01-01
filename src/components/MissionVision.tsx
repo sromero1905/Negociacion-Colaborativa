@@ -31,7 +31,7 @@ const MissionVision = () => {
   }, [hasAnimated]);
 
   return (
-    <section className="relative bg-neutral-950 py-24 overflow-hidden mt-10" ref={sectionRef}>
+    <section className="relative bg-neutral-950 py-24 overflow-hidden mt-10" ref={sectionRef} id='mision'>
       {/* Delicate Background Texture */}
       <div
         className="absolute inset-0 opacity-[0.1]"

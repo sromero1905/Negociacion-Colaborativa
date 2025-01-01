@@ -132,37 +132,34 @@ const Home = () => {
 
             {/* Action Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-              <button
-                className="group flex items-center px-8 py-4 rounded-xl font-medium 
-                bg-gradient-to-r from-blue-600 to-blue-500 
-                hover:from-blue-500 hover:to-blue-600
-                transition-all duration-200 
-                gap-3 shadow-lg shadow-blue-500/20 
-                relative overflow-hidden"
+            <button>
+              <a
+                href="/pricing"
+                className="group px-8 py-4 rounded-xl font-medium
+                border border-emerald-500/30
+                bg-emerald-500/5 hover:bg-emerald-500/10
+                text-emerald-400 hover:text-emerald-300
+                transition-all duration-200
+                ring-1 ring-emerald-500/20 hover:ring-emerald-500/40
+                inline-block text-center no-underline"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                <span className="relative z-10">Iniciar Programa</span>
-                <ArrowRight 
-                  size={18} 
-                  className="relative z-10 transform transition-transform duration-200 group-hover:translate-x-1" 
-                />
-              </button>
-              
-              <button>
-               
-               <a
-               href="/mas-info"
-               className="group px-8 py-4 rounded-xl font-medium 
-                 border border-blue-500/20
-                 bg-blue-500/10 hover:bg-blue-500/20
-                 text-blue-300 hover:text-blue-200
-                 transition-all duration-200
-                 shadow-lg shadow-black/20
-                 inline-block text-center no-underline"
-             >
-               Explorar Contenido
-             </a>
-              </button>
+                Iniciar Programa
+              </a>
+            </button>
+            <button>
+              <a
+                href="/mas-info"
+                className="group px-8 py-4 rounded-xl font-medium
+                border border-blue-500/20
+                bg-blue-500/10 hover:bg-blue-500/20
+                text-blue-300 hover:text-blue-200
+                transition-all duration-200
+                shadow-lg shadow-black/20
+                inline-block text-center no-underline"
+              >
+                Explorar Contenido
+              </a>
+            </button>
             </motion.div>
           </motion.div>
 

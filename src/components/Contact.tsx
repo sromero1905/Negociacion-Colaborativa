@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Mail, Phone, Globe, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Phone, Globe, ExternalLink, ArrowRight } from 'lucide-react';
 
 const AccessContact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -111,6 +112,41 @@ const AccessContact = () => {
           <p className="text-gray-400">
             Lunes a Viernes: 9:00 - 18:00 (GMT-3)
           </p>
+        </div>
+
+        {/* Contact Page Link */}
+        <div className={`flex justify-center mt-8 transform transition-all duration-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`} style={{ transitionDelay: '1000ms' }}>
+          <motion.a 
+            href="/contact"
+            whileHover={{ 
+              scale: 1.03,
+              transition: { duration: 0.2 }
+            }}
+            whileTap={{ 
+              scale: 0.97,
+              transition: { duration: 0.1 }
+            }}
+            className="group inline-flex items-center space-x-3 
+              bg-[#111111] border border-[#1A1A1A] 
+              px-6 py-3 rounded-lg
+              text-gray-400 hover:text-white 
+              transition-all duration-300 
+              hover:bg-[#141414] 
+              hover:border-[#2A2A2A]
+              shadow-md hover:shadow-xl
+              relative overflow-hidden"
+          >
+            {/* Subtle hover effect */}
+            <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <span className="text-base relative z-10">Ir a Página de Contacto</span>
+            <ArrowRight 
+              className="w-5 h-5 transform transition-transform duration-300 
+                group-hover:translate-x-1 opacity-70 group-hover:opacity-100 relative z-10"
+            />
+          </motion.a>
         </div>
       </div>
     </section>
