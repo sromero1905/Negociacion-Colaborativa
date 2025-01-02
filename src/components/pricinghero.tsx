@@ -1,8 +1,41 @@
 import React, { useState } from 'react';
 import { Check, Building2, User, Shield, Clock, Award } from 'lucide-react';
+import axios from "axios"
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
+
+
+
 
 const PricingHero = () => {
+  const [preferenceId, setPreferenceId] = useState(null)
+  initMercadoPago('YOUR_PUBLIC_KEY',{
+    locale:"es-AR"
+  });
   const [planType, setPlanType] = useState('individual');
+
+const createPreference = async()=>{
+  try{
+    const response  = await axios.post("http://localhost:3000/create_preference",{
+      title:"Curso Completo Pack Individual",
+      quatity:1,
+      price:100
+    })
+    const {id} = response.data
+    return id;
+  } 
+  catch(error){
+    console.log(error);
+  }
+
+}
+
+const handleBuy = async() =>{
+  const id = await createPreference()
+  if(id){
+    setPreferenceId(id);
+  }
+}
 
   return (
     <section className="relative py-16 sm:py-24">
@@ -96,8 +129,8 @@ const PricingHero = () => {
                     {/* Pricing */}
                     <div className="mb-8 pb-8 border-b border-gray-800">
                       <div className="flex items-baseline mb-2">
-                        <span className="text-4xl sm:text-5xl font-bold text-white">$497</span>
-                        <span className="text-gray-400 ml-2">USD</span>
+                        <span className="text-4xl sm:text-5xl font-bold text-white price">$100</span>
+                        <span className="text-gray-400 ml-2">ARS</span>
                       </div>
                       <p className="text-sm text-gray-400">Pago único - Sin cargos recurrentes</p>
                     </div>
@@ -145,11 +178,12 @@ const PricingHero = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 px-6 rounded-xl transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg hover:shadow-blue-500/25">
+                    <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 px-6 rounded-xl transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg hover:shadow-blue-500/25" onClick={handleBuy}>
                       Comenzar ahora
                     </button>
+                    {preferenceId &&  <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts:{ valueProp: 'smart_option'}}} />}
+                   
 
-                    {/* Bottom Section */}
                     <div className="mt-6 sm:mt-0 sm:absolute sm:bottom-0 sm:left-0 sm:right-0 sm:px-12 sm:py-6 sm:bg-gray-800/50 sm:rounded-b-[20px] sm:border-t sm:border-gray-800">
                       <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
                         <div className="flex items-center space-x-2">
