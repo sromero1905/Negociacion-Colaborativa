@@ -7,6 +7,7 @@ import MoreInfo from './pages/moreinformation';
 import ModuleDetail from './components/modulo.detail';
 import Pricing from './pages/Pricing';
 import Contact from './pages/contact';
+import Checkout from './pages/checkout';
 const App = () => {
   return (
     <Routes> {/* Define tus rutas aquí */}
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/modulo/:moduleId" element={<ModuleDetail />} />
       <Route path="/pricing" element={<Pricing/>} /> 
       <Route path="/contact" element={<Contact/>} /> 
+      <Route path="/checkout" element={<Checkout/>} /> 
     </Routes>
   );
 };
