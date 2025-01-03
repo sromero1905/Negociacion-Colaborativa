@@ -2,23 +2,29 @@ import React, { useState } from 'react';
 import { Check, Building2, User, Shield, Clock, Award } from 'lucide-react';
 import axios from "axios"
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-
+import { Config } from 'pretty-format';
 
 
 
 
 const PricingHero = () => {
   const [preferenceId, setPreferenceId] = useState(null)
-  initMercadoPago('YOUR_PUBLIC_KEY',{
-    locale:"es-AR"
+  const publicKey = process.env.REACT_APP_MERCADOPAGO_PUBLIC_KEY;
+  
+  if (!publicKey) {
+    throw new Error('REACT_APP_MERCADOPAGO_PUBLIC_KEY must be defined');
+  }
+
+  initMercadoPago(publicKey, {
+    locale: "es-AR"
   });
   const [planType, setPlanType] = useState('individual');
 
 const createPreference = async()=>{
   try{
-    const response  = await axios.post("http://localhost:3000/create_preference",{
+    const response  = await axios.post("http://localhost:3001/create_preference",{
       title:"Curso Completo Pack Individual",
-      quatity:1,
+      quantity: 1,  // Corregido "quatity" a "quantity"
       price:100
     })
     const {id} = response.data
