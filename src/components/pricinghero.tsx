@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Building2, User, Shield, Clock, Award } from 'lucide-react';
-
+import { PRICES } from '../config/pricing';
+import { EXCHANGE } from '../config/pricing';
 const PricingHero = () => {
   const [planType, setPlanType] = useState('individual');
 
@@ -97,8 +98,9 @@ const PricingHero = () => {
                     {/* Pricing */}
                     <div className="mb-8 pb-8 border-b border-gray-800">
                       <div className="flex items-baseline mb-2">
-                        <span className="text-5xl font-bold text-white">$497</span>
-                        <span className="text-gray-400 ml-2">USD</span>
+                        <span className="text-5xl font-bold text-white"> ${PRICES.COURSE_INDIVIDUAL}
+                        </span>
+                        <span className="text-gray-400 ml-2">{EXCHANGE.PESOS_ARGENTINOS}</span>
                       </div>
                       <p className="text-sm text-gray-400">Pago único - Sin cargos recurrentes</p>
                     </div>
@@ -185,8 +187,8 @@ const PricingHero = () => {
                       
                       <div className="mt-6">
                         <div className="flex items-baseline">
-                          <span className="text-5xl font-bold text-white">$1,997</span>
-                          <span className="text-gray-400 ml-2">USD</span>
+                          <span className="text-5xl font-bold text-white">${PRICES.COURSE_TEAM_EMPRESARIAL}</span>
+                          <span className="text-gray-400 ml-2">{EXCHANGE.PESOS_ARGENTINOS}</span>
                         </div>
                         <p className="text-sm text-gray-400 mt-2">Hasta 5 miembros</p>
                       </div>

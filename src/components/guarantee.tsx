@@ -179,9 +179,11 @@ const Guarantee = () => {
                 <p className="text-gray-400">
                   Más de 2,000 estudiantes confían en nosotros
                 </p>
+                <a href="/Checkout">
                 <button className="inline-flex items-center justify-center px-6 bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 rounded-xl font-medium transition-all duration-300 hover:opacity-90 hover:shadow-lg">
   Comenzar Ahora
 </button>
+</a>
               </div>
             </motion.div>
           </motion.div>

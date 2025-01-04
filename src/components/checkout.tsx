@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { User, Mail, Phone, Building2, FileText, MapPin, Globe, Shield, CreditCard, Lock, AlertCircle, Check, ArrowRight } from 'lucide-react';
 import axios from 'axios';
 import { initMercadoPago } from '@mercadopago/sdk-react';
-
+import { EXCHANGE, PRICES } from '../config/pricing';
 interface FormData {
   nombre: string;
   apellido: string;
@@ -55,7 +55,7 @@ const CheckoutForm = () => {
       const response = await axios.post("http://localhost:3001/create_preference", {
         title: "Curso Completo Pack Individual",
         quantity: 1,
-        price: 100,
+        price: PRICES.COURSE_INDIVIDUAL,
         payer: {
           name: formData.nombre,
           surname: formData.apellido,
@@ -374,17 +374,16 @@ const CheckoutForm = () => {
                   <div className="space-y-4 pt-6 border-t border-gray-700/50">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Subtotal</span>
-                      <span className="text-white font-medium">$100.00</span>
+                      <span className="text-white font-medium">$ {PRICES.COURSE_INDIVIDUAL}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">IVA (21%)</span>
-                      <span className="text-white font-medium">$21.00</span>
+                    
                     </div>
                   </div>
 
                   <div className="flex justify-between items-center pt-6 border-t border-gray-700/50">
                     <span className="text-lg font-semibold text-white">Total</span>
-                    <span className="text-2xl font-bold text-indigo-400">$121.00</span>
+                    <span className="text-2xl font-bold text-indigo-400">${ PRICES.COURSE_INDIVIDUAL}</span>
                   </div>
 
                   <div className="bg-gray-900/30 rounded-xl p-4 backdrop-blur-lg border border-gray-700/30">

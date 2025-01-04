@@ -101,7 +101,7 @@ const Home = () => {
 
             {/* Headline */}
             <motion.div variants={itemVariants} className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight">
                 <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
                   Domina el Arte de la
                 </span>
@@ -110,56 +110,56 @@ const Home = () => {
                   Negociación
                 </span>
               </h1>
-              <p className="text-xl lg:text-2xl text-neutral-400 leading-relaxed max-w-2xl">
+              <p className="text-lg sm:text-xl lg:text-2xl text-neutral-400 leading-relaxed max-w-2xl">
                 Desarrolla habilidades avanzadas de negociación y comunicación estratégica para transformar cada interacción en una oportunidad de éxito.
               </p>
             </motion.div>
 
             {/* Features */}
-            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-6 max-w-2xl">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl">
               {features.map(({ text, icon: Icon }, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center space-x-3 bg-blue-500/5 rounded-xl p-4 border border-blue-400/10 hover:bg-blue-500/10 hover:border-blue-400/20 transition-colors duration-200"
+                  className="flex items-center space-x-4 bg-blue-500/5 rounded-xl p-4 sm:p-5 border border-blue-400/10 hover:bg-blue-500/10 hover:border-blue-400/20 transition-colors duration-200"
                 >
-                  <div className="p-2 bg-blue-500/10 rounded-lg">
+                  <div className="flex-shrink-0 p-2 bg-blue-500/10 rounded-lg">
                     <Icon size={20} className="text-blue-400" />
                   </div>
-                  <span className="text-neutral-200 font-medium">{text}</span>
+                  <span className="text-neutral-200 font-medium text-sm sm:text-base">{text}</span>
                 </div>
               ))}
             </motion.div>
 
             {/* Action Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-            <button>
-              <a
-                href="/pricing"
-                className="group px-8 py-4 rounded-xl font-medium
-                border border-emerald-500/30
-                bg-emerald-500/5 hover:bg-emerald-500/10
-                text-emerald-400 hover:text-emerald-300
-                transition-all duration-200
-                ring-1 ring-emerald-500/20 hover:ring-emerald-500/40
-                inline-block text-center no-underline"
-              >
-                Iniciar Programa
-              </a>
-            </button>
-            <button>
-              <a
-                href="/mas-info"
-                className="group px-8 py-4 rounded-xl font-medium
-                border border-blue-500/20
-                bg-blue-500/10 hover:bg-blue-500/20
-                text-blue-300 hover:text-blue-200
-                transition-all duration-200
-                shadow-lg shadow-black/20
-                inline-block text-center no-underline"
-              >
-                Explorar Contenido
-              </a>
-            </button>
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
+              <button className="w-full sm:w-auto">
+                <a
+                  href="/pricing"
+                  className="group w-full px-8 py-4 rounded-xl font-medium
+                  border border-emerald-500/30
+                  bg-emerald-500/5 hover:bg-emerald-500/10
+                  text-emerald-400 hover:text-emerald-300
+                  transition-all duration-200
+                  ring-1 ring-emerald-500/20 hover:ring-emerald-500/40
+                  inline-block text-center no-underline"
+                >
+                  Iniciar Programa
+                </a>
+              </button>
+              <button className="w-full sm:w-auto">
+                <a
+                  href="/mas-info"
+                  className="group w-full px-8 py-4 rounded-xl font-medium
+                  border border-blue-500/20
+                  bg-blue-500/10 hover:bg-blue-500/20
+                  text-blue-300 hover:text-blue-200
+                  transition-all duration-200
+                  shadow-lg shadow-black/20
+                  inline-block text-center no-underline"
+                >
+                  Explorar Contenido
+                </a>
+              </button>
             </motion.div>
           </motion.div>
 
@@ -181,7 +181,7 @@ const Home = () => {
                   className="w-full h-[750px] object-cover object-center opacity-80"
                 />
 
-                {/* Static overlay instead of animated */}
+                {/* Static overlay */}
                 <div
                   className="absolute inset-0 opacity-40 z-20"
                   style={{

@@ -56,30 +56,30 @@ const ContactForm: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gray-950 py-16 px-6">
+    <div className="bg-gray-950 py-8 sm:py-16 px-4 sm:px-6">
       <div className="container mx-auto max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="bg-gray-900/50 backdrop-blur-xl rounded-3xl 
+          className="bg-gray-900/50 backdrop-blur-xl rounded-2xl sm:rounded-3xl 
             border border-gray-800/30 
             shadow-xl shadow-black/10 
-            overflow-hidden"
+            overflow-hidden w-full"
         >
-          <div className="px-6 md:px-12 py-12">
-            <div className="text-center mb-12">
-              <div className="flex justify-center mb-6">
+          <div className="px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+            <div className="text-center mb-8 sm:mb-12">
+              <div className="flex justify-center mb-4 sm:mb-6">
                 <MessageCircle 
                   className="text-indigo-500/70" 
-                  size={40} 
+                  size={32} 
                   strokeWidth={1.5}
                 />
               </div>
-              <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-white mb-3 sm:mb-4">
                 <span className="font-semibold">Contacta</span> Nuestro Equipo
               </h2>
-              <p className="text-gray-400 max-w-2xl mx-auto text-base leading-relaxed">
+              <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
                 Estamos listos para guiarte en tu journey de desarrollo profesional. 
                 Comparte tus dudas o inquietudes y nos pondremos en contacto contigo.
               </p>
@@ -93,10 +93,10 @@ const ContactForm: React.FC = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="space-y-6"
+                  className="space-y-4 sm:space-y-6"
                 >
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-3">
+                  <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="space-y-2 sm:space-y-3">
                       <label className="text-white/70 text-sm ml-1 block">Nombre Completo</label>
                       <input 
                         type="text"
@@ -112,7 +112,7 @@ const ContactForm: React.FC = () => {
                           disabled:opacity-50 disabled:cursor-not-allowed"
                       />
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <label className="text-white/70 text-sm ml-1 block">Correo Electrónico</label>
                       <input 
                         type="email"
@@ -130,7 +130,7 @@ const ContactForm: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     <label className="text-white/70 text-sm ml-1 block">Tema de Consulta</label>
                     <select 
                       name="topic"
@@ -150,7 +150,7 @@ const ContactForm: React.FC = () => {
                     </select>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     <label className="text-white/70 text-sm ml-1 block">Mensaje</label>
                     <textarea 
                       name="message"
@@ -178,7 +178,7 @@ const ContactForm: React.FC = () => {
                       scale: formStatus !== 'sending' ? 0.97 : 1,
                       transition: { duration: 0.1 }
                     }}
-                    className={`w-full py-4 rounded-xl 
+                    className={`w-full py-3 sm:py-4 rounded-xl 
                       transition-all duration-300 
                       flex items-center justify-center space-x-3
                       focus:outline-none focus:ring-2 focus:ring-indigo-500/40
@@ -207,17 +207,17 @@ const ContactForm: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
-                  className="text-center space-y-6"
+                  className="text-center space-y-4 sm:space-y-6"
                 >
-                  <div className="flex justify-center mb-6">
-                    <div className="bg-indigo-500/20 p-6 rounded-full">
-                      <Check size={56} className="text-indigo-500" />
+                  <div className="flex justify-center mb-4 sm:mb-6">
+                    <div className="bg-indigo-500/20 p-4 sm:p-6 rounded-full">
+                      <Check className="w-10 h-10 sm:w-14 sm:h-14 text-indigo-500" />
                     </div>
                   </div>
-                  <h2 className="text-3xl font-light text-white mb-4">
+                  <h2 className="text-2xl sm:text-3xl font-light text-white mb-3 sm:mb-4">
                     Consulta <span className="font-semibold">Enviada</span>
                   </h2>
-                  <p className="text-gray-400 max-w-md mx-auto mb-6">
+                  <p className="text-gray-400 max-w-md mx-auto mb-4 sm:mb-6 text-sm sm:text-base">
                     Hemos recibido tu mensaje. Nuestro equipo lo revisará 
                     y se pondrá en contacto contigo pronto.
                   </p>
