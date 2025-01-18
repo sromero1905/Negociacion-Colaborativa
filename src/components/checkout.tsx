@@ -154,7 +154,7 @@ const CheckoutForm = () => {
         <div className="mb-12">
           <div className="flex justify-center mb-12">
             <div className="bg-gray-800/50 p-6 rounded-2xl backdrop-blur-lg border border-gray-700/30">
-              <img src="/api/placeholder/180/60" alt="Logo" className="h-10" />
+              <img src="./LogoChekcout.png" alt="Logo" className="h-10" />
             </div>
           </div>
           
