@@ -109,11 +109,11 @@ const Configuration: React.FC = () => {
       const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:1337/api';
       
       // Crear instancia de Axios con token de autenticación
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem('userToken');
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
       
       // Llamar a la API para cambiar la contraseña
-      const response = await axios.post(`${API_URL}/user-elearnings/change-password`, {
+      const response = await axios.post(`${API_URL}/api/user-elearnings/change-password`, {
         currentPassword: passwordForm.currentPassword,
         newPassword: passwordForm.newPassword,
         userId: userData.id,
