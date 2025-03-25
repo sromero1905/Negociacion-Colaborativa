@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 // Configuración de API con fetch
-const API_URL = process.env.BACK_URL || 'http://localhost:1337';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:1337';
 
 // Interfaces
 interface UserData {

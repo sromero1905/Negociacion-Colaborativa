@@ -86,7 +86,7 @@ interface Capsula {
 }
 
 // Configuración de la URL de API
-const API_URL = process.env.BACK_URL || 'http://localhost:1337';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:1337';
 
 // Configuración de Axios
 const api = axios.create({

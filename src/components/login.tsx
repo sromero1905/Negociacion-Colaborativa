@@ -13,7 +13,9 @@ interface LoginState {
   confirmPassword: string;
   resetStep: 'requestToken' | 'enterToken';
 }
-const BACK_URL = process.env.BACK_URL;
+const BACK_URL = process.env.REACT_APP_API_URL;
+
+
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<LoginState>({

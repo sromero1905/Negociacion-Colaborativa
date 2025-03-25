@@ -2,7 +2,7 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
 // Determinar la URL base según el entorno
 const API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://tu-api-produccion.com' // Reemplazar con tu URL de producción
+  ? 'https://backendelearning.onrender.com' 
   : 'http://localhost:1337';
 
 // Interfaz para las respuestas de login

@@ -106,7 +106,7 @@ const Configuration: React.FC = () => {
       setLoading(true);
       
       // Obtener la URL base de la API desde las variables de entorno
-      const API_URL = process.env.BACK_URL || 'http://localhost:1337/api';
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:1337/api';
       
       // Crear instancia de Axios con token de autenticación
       const token = localStorage.getItem('jwt');
