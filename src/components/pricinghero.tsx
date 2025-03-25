@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Check, Building2, User, Shield, Clock, Award } from 'lucide-react';
+import { Check, Building2, User, Shield, Clock, Award, Send } from 'lucide-react';
 
-const PricingHero = () => {
-  const [planType, setPlanType] = useState('individual');
+const PricingHero: React.FC = () => {
+  const [planType, setPlanType] = useState<'individual' | 'business'>('individual');
 
   // Sample prices (replace with your actual config)
   const PRICES = {
@@ -14,15 +14,31 @@ const PricingHero = () => {
     PESOS_ARGENTINOS: 'ARS'
   };
 
+  // WhatsApp contact number (replace with your actual number)
+  const WHATSAPP_NUMBER = '+5491234567890';
+  
+  // Predefined message for WhatsApp
+  const getWhatsAppMessage = () => {
+    return encodeURIComponent(
+      `Hola! Estoy interesado en el Plan Individual de tu curso. Quiero más información y comprar ahora.`
+    );
+  };
+
+  // Generate WhatsApp link
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${getWhatsAppMessage()}`;
+
   return (
     <section className="relative py-12 md:py-24">
       {/* Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute inset-0" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 163 184) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
+        <div 
+          className="absolute inset-0 opacity-[0.03]" 
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 163 184) 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} 
+        />
         {/* Gradient Orbs - Responsive sizes */}
         <div className="absolute top-0 left-1/4 w-48 md:w-96 h-48 md:h-96 bg-blue-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-48 md:w-96 h-48 md:h-96 bg-indigo-500/10 rounded-full blur-3xl" />
@@ -155,25 +171,31 @@ const PricingHero = () => {
                       ))}
                     </div>
 
-                    {/* CTA Button */}
-                    <a href="/Checkout" className="block">
-                      <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 px-6 rounded-xl transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg hover:shadow-blue-500/25">
-                        Comenzar ahora
+                    {/* CTA Button - WhatsApp Link */}
+                    <a 
+                      href={whatsappLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block"
+                    >
+                      <button className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-green-500 to-green-600 text-white py-4 px-6 rounded-xl transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg hover:shadow-green-500/25">
+                        <Send className="w-5 h-5" />
+                        <span>Comprar por WhatsApp</span>
                       </button>
                     </a>
-                  </div>
 
-                  {/* Bottom Section */}
-                  <div className="p-6 md:px-12 md:py-6 bg-gray-800/50 rounded-b-[20px] border-t border-gray-800">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                      <div className="flex items-center space-x-2">
-                        <Award className="w-5 h-5 text-blue-400" />
-                        <span className="text-sm text-gray-400">Satisfacción garantizada</span>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <img src="/visa-line.png" alt="Visa" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
-                        <img src="/mastercard-line.png" alt="Mastercard" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
-                        <img src="/bank-line.png" alt="Transferencia" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                    {/* Bottom Section */}
+                    <div className="p-6 md:px-12 md:py-6 bg-gray-800/50 rounded-b-[20px] border-t border-gray-800">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div className="flex items-center space-x-2">
+                          <Award className="w-5 h-5 text-blue-400" />
+                          <span className="text-sm text-gray-400">Satisfacción garantizada</span>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                          <img src="/visa-line.png" alt="Visa" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                          <img src="/mastercard-line.png" alt="Mastercard" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                          <img src="/bank-line.png" alt="Transferencia" className="h-6 opacity-50 hover:opacity-75 transition-opacity" />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -192,53 +214,6 @@ const PricingHero = () => {
                     <div className="mb-8">
                       <h3 className="text-xl font-semibold text-white mb-2">Equipos</h3>
                       <p className="text-gray-400">Para equipos pequeños</p>
-                      
-                      <div className="mt-6">
-                        <div className="flex items-baseline">
-                          <span className="text-4xl md:text-5xl font-bold text-white">
-                            ${PRICES.COURSE_TEAM_EMPRESARIAL}
-                          </span>
-                          <span className="text-gray-400 ml-2">{EXCHANGE.PESOS_ARGENTINOS}</span>
-                        </div>
-                        <p className="text-sm text-gray-400 mt-2">Hasta 5 miembros</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-5 mb-8">
-                      {[
-                        'Todo el contenido del curso',
-                        'Dashboard de equipo',
-                        'Reportes de progreso',
-                        'Soporte prioritario',
-                        'Sesiones grupales mensuales'
-                      ].map((feature, index) => (
-                        <div key={index} className="flex items-start">
-                          <div className="flex-shrink-0 mt-1">
-                            <div className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center">
-                              <Check className="w-3.5 h-3.5 text-gray-400" />
-                            </div>
-                          </div>
-                          <span className="ml-3 text-gray-300">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <button className="w-full bg-white text-gray-900 py-4 px-6 rounded-xl hover:bg-gray-100 transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg">
-                      Contactar ventas
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Enterprise Plan */}
-              <div className="relative group">
-                <div className="absolute -inset-[0.5px] bg-gradient-to-r from-blue-500/50 to-indigo-500/50 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
-                <div className="relative bg-gray-900 rounded-[20px] border border-gray-800">
-                  <div className="h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500" />
-                  <div className="p-6 md:p-12">
-                    <div className="mb-8">
-                      <h3 className="text-xl font-semibold text-white mb-2">Empresarial</h3>
-                      <p className="text-gray-400">Solución personalizada</p>
                       
                       <div className="mt-6">
                         <div className="text-4xl md:text-5xl font-bold text-white">Personalizado</div>
@@ -265,9 +240,17 @@ const PricingHero = () => {
                       ))}
                     </div>
 
-                    <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 px-6 rounded-xl transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg hover:shadow-blue-500/25">
-                      Agendar llamada
-                    </button>
+                    <a 
+                      href={whatsappLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block"
+                    >
+                      <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 px-6 rounded-xl transition-all duration-200 transform hover:translate-y-[-1px] hover:shadow-lg hover:shadow-blue-500/25 flex items-center justify-center space-x-3">
+                        <Send className="w-5 h-5" />
+                        <span>Agendar llamada</span>
+                      </button>
+                    </a>
                   </div>
                 </div>
               </div>

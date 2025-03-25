@@ -37,6 +37,8 @@ const Navbar: React.FC = () => {
     { href: "#mision", label: "Misión" },
     { href: "/mas-info", label: "Programa" },
     { href: "/contact", label: "Contacto" },
+    {href:'/home/elearning/2',label:"Campus"}
+
   ];
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
