@@ -155,7 +155,7 @@ const Header: React.FC = () => {
               <div className="hidden md:block">
                 <a href="/home/elearning/2">
                   <h1 className="text-white font-semibold text-lg tracking-tight">
-                    Negociación Constructivaa
+                    Negociación Colaborativa
                   </h1>
                   <div className="flex items-center mt-1 space-x-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
